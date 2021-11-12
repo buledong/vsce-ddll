@@ -1,0 +1,83 @@
+{
+  "name": "ddll",
+  "displayName": "ddll",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "注释activationEvents": "扩展的激活事件, 这里写明白, 哪些插件在什么时候激活",
+  "activationEvents": [
+    "onCommand:ddll.helloWorld",
+    "onCommand:ddll.testEditorCommand"
+  ],
+  "注释main": "入口文件",
+  "main": "./dist/extension.js",
+  "注释contributes": "插件大部分功能配置都在这里",
+  "contributes": {
+    "注释commands": "说明有哪些命令, 不在这里写的, 都是非法命令",
+    "commands": [
+      {
+        "command": "ddll.helloWorld",
+        "title": "ddll => Hello World"
+      },
+      {
+        "command": "ddll.testEditorCommand",
+        "title": "ddll => testEditorCommand"
+      }
+    ],
+    "keybindings": [
+      {
+        "注释key": "+前后不能有空格",
+        "command": "ddll.helloWorld",
+        "key": "ctrl+f10",
+        "mac": "cmd+f10",
+        "when": "editorFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorFocus",
+          "command": "ddll.helloWorld",
+          "group": "navigation"
+        },
+        {
+          "when": "editorFocus",
+          "command": "ddll.testEditorCommand",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p -w . --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.60.0",
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "eslint": "^7.32.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.1",
+    "typescript": "^4.4.3",
+    "ts-loader": "^9.2.5",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0",
+    "@vscode/test-electron": "^1.6.2"
+  }
+}
